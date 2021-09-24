@@ -1,0 +1,230 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Data Types and User-defined Types &#8212; behave 1.2.6.1: Examples and Tutorials</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="/Users/jens/se/_topic.behave/behave.example_main/docs/_static/ansi_gherkin.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/ansi.css" />
+    <link rel="stylesheet" href="../_static/my-styles.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Type Definition Basics" href="basics.html" />
+    <link rel="prev" title="Tutorial 12: Use another Spoken Language" href="../tutorials/tutorial12.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js "></script>
+<script type="text/javascript" src="../_static/js/jquery-fix.js "></script>
+<script type="text/javascript" src="../_static/bootstrap-3.3.7/js/bootstrap.min.js "></script>
+<script type="text/javascript" src="../_static/bootstrap-sphinx.js "></script>
+
+  </head><body>
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html">
+          behave.example</a>
+        <span class="navbar-text navbar-version pull-left"><b>1.2</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../index.html">Document <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Data Types and User-defined Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../step_matcher/index.html">Step Matchers</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../refs.html">References</a></li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">Data Types and User-defined Types</a></li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li>
+    <a href="../tutorials/tutorial12.html" title="Previous Chapter: Tutorial 12: Use another Spoken Language"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Tutorial 12: ...</span>
+    </a>
+  </li>
+  <li>
+    <a href="basics.html" title="Next Chapter: Type Definition Basics"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Type Definiti... &raquo;</span>
+    </a>
+  </li>
+              
+            
+            
+            
+            
+              <li class="hidden-sm">
+<div id="sourcelink">
+  <a href="../_sources/datatype/index.rst.txt"
+     rel="nofollow">Source</a>
+</div></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="body col-md-12 content" role="main">
+      
+  <div class="section" id="data-types-and-user-defined-types">
+<span id="id-datatype"></span><h1>Data Types and User-defined Types<a class="headerlink" href="#data-types-and-user-defined-types" title="Permalink to this headline">¶</a></h1>
+<p id="index-0">The following sections describe in more detail how user-defined data types
+are used in <a class="reference external" href="https://pypi.org/project/behave">behave</a>. The type converter functionality, that is described here,
+is only supported by the:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>“parse” matcher (based on: <a class="reference external" href="https://pypi.org/project/parse">parse</a> module)</p></li>
+<li><p>“cfparse” matcher (based on: <a class="reference external" href="https://pypi.org/project/parse-type">parse-type</a> module)</p></li>
+</ul>
+</div></blockquote>
+<hr class="docutils" />
+<p><strong>Contents:</strong></p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="basics.html">Type Definition Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="builtin_types.html">Predefined Data Types in <code class="docutils literal notranslate"><span class="pre">parse</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="cardinality_zero_or_one.html">Cardinality: Zero or One (Optional)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cardinality_one_or_more.html">Cardinality: One or More (List of Type)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cardinality_zero_or_more.html">Cardinality: Zero or More (List of Type)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="choice.html">Choice (Word/String Alternatives)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="choice2.html">Choice2 (Word/String Alternatives)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="enum.html">Enumeration (String-to-Value Mapping)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="more_complex_types.html">More Complex Data Types</a></li>
+</ul>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Part of the functionality, that is described here, is based on
+<a class="reference external" href="https://pypi.org/project/parse-type">parse-type</a>, an extension of the excellent <a class="reference external" href="https://pypi.org/project/parse">parse</a> module.</p>
+<p>The <a class="reference external" href="https://pypi.org/project/parse">parse</a> module is the inverse of Python <a class="reference external" href="https://docs.python.org/3/library/string.html#format-string-syntax">string.format</a> function.
+The <a class="reference external" href="https://pypi.org/project/parse-type">parse-type</a> module extends it to simplify the generation of types
+(actually type converter functions for types).</p>
+<p id="index-1"><a class="reference external" href="https://pypi.org/project/parse">parse</a> <em>features</em>:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Optional <code class="xref py py-attr docutils literal notranslate"><span class="pre">pattern</span></code> attribute (for regex) in user-defined type converters.</p></li>
+<li><p>The <code class="xref py py-func docutils literal notranslate"><span class="pre">with_pattern()</span></code> decorator for type-converters.</p></li>
+</ul>
+</div></blockquote>
+<p><a class="reference external" href="https://pypi.org/project/parse-type">parse-type</a> <em>features</em>:</p>
+<blockquote>
+<div><ul>
+<li><p>Simplifies the creation of type converters for some common cases</p></li>
+<li><p>Creates type converter variants based on cardinality</p></li>
+<li><p><code class="xref py py-mod docutils literal notranslate"><span class="pre">parse_type</span></code> extensions (<code class="xref py py-class docutils literal notranslate"><span class="pre">TypeBuilder</span></code> functionality).</p></li>
+<li><p>Provides an extended parser with <strong>cardinality field</strong> support.
+A cardinality field is a type suffix in parse expression, like:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 18%" />
+<col style="width: 30%" />
+<col style="width: 52%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Cardinality</p></th>
+<th class="head"><p>Example</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0..1</p></td>
+<td><p>“{person:Person?}”</p></td>
+<td><p>Zero or one:  For optional parts.</p></td>
+</tr>
+<tr class="row-odd"><td><p>0..*</p></td>
+<td><p>“{persons:Person*}”</p></td>
+<td><p>Zero or more: For list&lt;T&gt; (many0).</p></td>
+</tr>
+<tr class="row-even"><td><p>1..*</p></td>
+<td><p>“{persons:Person+}”</p></td>
+<td><p>One  or more: For list&lt;T&gt; (many).</p></td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2012-2020 by Jens Engel.&nbsp;&nbsp;
+      Last updated on 2020-11-04.&nbsp;&nbsp;
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.3.0.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>
